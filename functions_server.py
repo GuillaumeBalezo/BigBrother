@@ -19,10 +19,9 @@ face_encoder_resnet = dlib.face_recognition_model_v1(models.dlib_face_recognitio
 ## UTILS
 # concatenate the name and coordinates to send
 def concatenate(name,coord):
-    list=[[]]*len(name)
+    list=[]*len(name)
     for i in range(len(name)):
-        list[i].append([name[i]])
-        list[i].append(coord[i])
+        list.append([name[i],coord[i]])
     return list
 def prepare_to_send(name,coord):
     str_to_send=str(len(name))
