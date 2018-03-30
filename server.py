@@ -8,8 +8,9 @@ import preprocessing
 import h5py
 import os
 import pickle
+import cv2
 
-SERVER_IP = ""
+SERVER_IP = "157.159.42.94"
 SERVER_PORT = 8089
 MAX_NUM_CONNECTIONS = 20
 
@@ -33,7 +34,8 @@ class ConnectionPool(Thread):
             individus = -1
             name = []
             while True:
-                fileDescriptor = conn.makefile(mode='rb')
+                connection_thread=self.conn
+                fileDescriptor = connection_thread.makefile(mode='rb')
                 result = fileDescriptor.readline()
                 fileDescriptor.close()
                 result = base64.b64decode(result)
@@ -52,8 +54,8 @@ class ConnectionPool(Thread):
                     #print("Phase de tracking")
                 individus = tmp
                 data=functions.concatenate(name,face_locations)
-                data=pickle.dumps(data)
-                conn.sendall(data)
+                data=pickle.dumps(data,2) #python2 sinon pas de chiffre pour python3
+                connection_thread.sendall(data)
         except Exception as e:
             print("Connection lost with " + self.ip + ":" + str(self.port) +"\r\n[Error] " + str(e.message))
         self.conn.close()
@@ -65,12 +67,12 @@ if __name__ == '__main__':
     for file in os.listdir("./ressources/known_peoples"):
         known_peoples_labels.append(str(file)[:-4]) # (n, 1)
     print("Waiting connections...")
-    connection = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    connection.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    connection.bind((SERVER_IP, SERVER_PORT))
-    connection.listen(MAX_NUM_CONNECTIONS)
     while True:
-        (conn, (ip, port)) = connection.accept()
-        thread = ConnectionPool(ip, port, conn,known_peoples_encodings,known_peoples_labels)
+        connection = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        connection.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        connection.bind((SERVER_IP, SERVER_PORT))
+        connection.listen(MAX_NUM_CONNECTIONS)
+        (conn_, (ip, port)) = connection.accept()
+        thread = ConnectionPool(ip, port, conn_,known_peoples_encodings,known_peoples_labels)
         thread.start()
     connection.close()
