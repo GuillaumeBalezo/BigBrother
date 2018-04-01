@@ -8,7 +8,6 @@ import preprocessing
 import h5py
 import os
 import pickle
-import cv2
 
 SERVER_IP = "157.159.42.94"
 SERVER_PORT = 8089
