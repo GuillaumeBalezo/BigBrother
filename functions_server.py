@@ -23,13 +23,6 @@ def concatenate(name,coord):
     for i in range(len(name)):
         list.append([name[i],coord[i]])
     return list
-def prepare_to_send(name,coord):
-    str_to_send=str(len(name))
-    for i in range(len(name)):
-        str_to_send+=str(len(name[i]))+name[i]
-    for i in range(len(coord)):
-        str_to_send+=str(len(str(coord[i][0])))+str(coord[i][0])+str(len(str(coord[i][1])))+str(coord[i][1])
-    return bytes(str_to_send, 'utf-8')
 # load an image
 def load_image(chemin):
     # input : an jpg/png/... image
