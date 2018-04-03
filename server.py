@@ -66,11 +66,11 @@ if __name__ == '__main__':
     for file in os.listdir("./ressources/known_peoples"):
         known_peoples_labels.append(str(file)[:-4]) # (n, 1)
     print("Waiting connections...")
+    connection = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    connection.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    connection.bind((SERVER_IP, SERVER_PORT))
+    connection.listen(MAX_NUM_CONNECTIONS)
     while True:
-        connection = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        connection.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        connection.bind((SERVER_IP, SERVER_PORT))
-        connection.listen(MAX_NUM_CONNECTIONS)
         (conn_, (ip, port)) = connection.accept()
         thread = ConnectionPool(ip, port, conn_,known_peoples_encodings,known_peoples_labels)
         thread.start()
