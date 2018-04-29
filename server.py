@@ -40,15 +40,9 @@ class ConnectionPool(Thread):
                 result_temp = fileDescriptor.readline()
                 fileDescriptor.close()
                 result = base64.b64decode(result_temp)
-                if(result_temp[0:4]!=b'/9j/'):
-                    frame = np.fromstring(result, dtype=np.uint8)
-                    frame_matrix = np.array(frame)
-                    frame_matrix = np.reshape(frame_matrix, (IMAGE_HEIGHT, IMAGE_WIDTH,COLOR_PIXEL))
-                else:
-                    im = Image.open(io.BytesIO(result))
-                    width, height = im.size
-                    frame_matrix = np.array(im)
-
+                im = Image.open(io.BytesIO(result))
+                width, height = im.size
+                frame_matrix = np.array(im)
                 face_locations = functions.face_locations(frame_matrix)
                 tmp = len(face_locations)
                 if tmp > individus:
