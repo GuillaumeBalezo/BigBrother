@@ -8,8 +8,10 @@ import preprocessing
 import h5py
 import os
 import pickle
+import io
+from PIL import Image
 
-SERVER_IP = "157.159.42.94"
+SERVER_IP = ""
 SERVER_PORT = 8089
 MAX_NUM_CONNECTIONS = 20
 
@@ -35,17 +37,23 @@ class ConnectionPool(Thread):
             while True:
                 connection_thread=self.conn
                 fileDescriptor = connection_thread.makefile(mode='rb')
-                result = fileDescriptor.readline()
+                result_temp = fileDescriptor.readline()
                 fileDescriptor.close()
-                result = base64.b64decode(result)
-                frame = np.fromstring(result, dtype=np.uint8)
-                frame_matrix = np.array(frame)
-                frame_matrix = np.reshape(frame_matrix, (IMAGE_HEIGHT, IMAGE_WIDTH,COLOR_PIXEL))
+                result = base64.b64decode(result_temp)
+                if(result_temp[0:4]!=b'/9j/'):
+                    frame = np.fromstring(result, dtype=np.uint8)
+                    frame_matrix = np.array(frame)
+                    frame_matrix = np.reshape(frame_matrix, (IMAGE_HEIGHT, IMAGE_WIDTH,COLOR_PIXEL))
+                else:
+                    im = Image.open(io.BytesIO(result))
+                    width, height = im.size
+                    frame_matrix = np.array(im)
+
                 face_locations = functions.face_locations(frame_matrix)
                 tmp = len(face_locations)
                 if tmp > individus:
                     # recognition
-                    name, coord = functions.recognition(frame_matrix, face_locations, self.known_peoples_encodings, self.known_peoples_labels)   
+                    name, coord = functions.recognition(frame_matrix, face_locations, self.known_peoples_encodings, self.known_peoples_labels)
                     #print("Phase de reconnaissance")
                 else:
                     # tracking
@@ -55,8 +63,13 @@ class ConnectionPool(Thread):
                 data=functions.concatenate(name,face_locations)
                 data=pickle.dumps(data,2) #python2 sinon pas de chiffre pour python3
                 connection_thread.sendall(data)
+
+                #Test pour Android
+                # data=pickle.dumps([['Test', [194, 154, 373, 333]]],2)
+                # connection_thread.sendall(data)
+
         except Exception as e:
-            print("Connection lost with " + self.ip + ":" + str(self.port) +"\r\n[Error] " + str(e.message))
+            print("Connection lost with " + self.ip + ":" + str(self.port) +"\r\n[Error] " + str(e))#e.message
         self.conn.close()
 
 if __name__ == '__main__':
@@ -65,7 +78,7 @@ if __name__ == '__main__':
     known_peoples_labels = []
     for file in os.listdir("./ressources/known_peoples"):
         known_peoples_labels.append(str(file)[:-4]) # (n, 1)
-    print("Waiting connections...")
+    print("Waiting connections on "+SERVER_IP+":"+str(SERVER_PORT)+"...")
     connection = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     connection.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     connection.bind((SERVER_IP, SERVER_PORT))
