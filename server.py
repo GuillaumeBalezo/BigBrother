@@ -15,10 +15,6 @@ SERVER_IP = ""
 SERVER_PORT = 8089
 MAX_NUM_CONNECTIONS = 20
 
-IMAGE_HEIGHT = 480
-IMAGE_WIDTH = 640
-COLOR_PIXEL = 3  # RGB
-
 class ConnectionPool(Thread):
 
     def __init__(self, ip_, port_, conn_,known_peoples_encodings_,known_peoples_labels_):
