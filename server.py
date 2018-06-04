@@ -1,12 +1,9 @@
-import time
 import socket
 import numpy as np
 import base64
 from threading import Thread
 import functions_server as functions
-import preprocessing
 import h5py
-import os
 import pickle
 import io
 from PIL import Image
@@ -53,10 +50,7 @@ class ConnectionPool(Thread):
                 data=functions.concatenate(name,face_locations)
                 data=pickle.dumps(data,2) #python2 sinon pas de chiffre pour python3
                 connection_thread.sendall(data)
-
-                #Test pour Android
-                # data=pickle.dumps([['Test', [194, 154, 373, 333]]],2)
-                # connection_thread.sendall(data)
+                
 
         except Exception as e:
             print("Connection lost with " + self.ip + ":" + str(self.port) +"\r\n[Error] " + str(e))#e.message
