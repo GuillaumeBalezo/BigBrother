@@ -30,8 +30,8 @@ class ConnectionPool(Thread):
         try:
             individus = -1
             name = []
+            connection_thread=self.conn
             while True:
-                connection_thread=self.conn
                 fileDescriptor = connection_thread.makefile(mode='rb')
                 result_temp = fileDescriptor.readline()
                 fileDescriptor.close()
