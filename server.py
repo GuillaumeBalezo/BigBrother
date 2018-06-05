@@ -7,8 +7,9 @@ import h5py
 import pickle
 import io
 from PIL import Image
+import os
 
-SERVER_IP = ""
+SERVER_IP = "192.168.43.25"
 SERVER_PORT = 8089
 MAX_NUM_CONNECTIONS = 20
 
@@ -50,7 +51,7 @@ class ConnectionPool(Thread):
                 data=functions.concatenate(name,face_locations)
                 data=pickle.dumps(data,2) #python2 sinon pas de chiffre pour python3
                 connection_thread.sendall(data)
-                
+
 
         except Exception as e:
             print("Connection lost with " + self.ip + ":" + str(self.port) +"\r\n[Error] " + str(e))#e.message
