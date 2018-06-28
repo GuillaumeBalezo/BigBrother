@@ -8,9 +8,12 @@ def data():
     names = []
     i = 0
     for file in os.listdir("./ressources/known_peoples"):
-        descriptors.append(functions.face_encoding("./ressources/known_peoples/"+file))
-        names.append(i)
-        i += 1
+        enc = functions.face_encoding("./ressources/known_peoples/"+file)
+        if(enc != []):
+            descriptors.append(enc)
+            names.append(i)
+            i += 1
+            print(i)
     return names, descriptors
 
 known_peoples_labels, known_peoples_encodings = data()
