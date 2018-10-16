@@ -36,10 +36,10 @@ sudo pip install -r requirements.txt
 sudo pip3 install -r requirements.txt
 - On the master branch, you have to process some other installs:
      1. OpenCv: You can install it with pip (pip install opencv-python) but you can have some errors because it's a quick install, so if it doesn't work try ti follow this tutorial:\
-     [a link](https://docs.opencv.org/3.4.3/d2/de6/tutorial_py_setup_in_ubuntu.html)\
+     (https://docs.opencv.org/3.4.3/d2/de6/tutorial_py_setup_in_ubuntu.html)\
      If you use the server version don't install OpenCv and skip this step.
      2. (Optional) If you want to speed the run time of the algorithm: Install Cuda, CuDNN (check what version you should use according to your GPU) and "install tensorflow-gpu" with pip (Once again be carreful of the version you will use according to the version of Cuda and CuDNN)\
-     [a link](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html) For Cuda Toolkit v.10\
+     (https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html) For Cuda Toolkit v.10\
      If you use the client version skip this step. It would be relevant to process this step, if you have on a computer or a server with a powerfull GPU.
 
 -----
