@@ -40,7 +40,8 @@ sudo pip3 install -r requirements.txt
      If you use the server version don't install OpenCv and skip this step.
      2. (Optional) If you want to speed the run time of the algorithm: Install Cuda, CuDNN (check what version you should use according to your GPU) and "install tensorflow-gpu" with pip (Once again be carreful of the version you will use according to the version of Cuda and CuDNN)\
      https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html For Cuda Toolkit v.10\
-     If you use the client version skip this step. It would be relevant to process this step, if you have on a computer or a server with a powerfull GPU.
+     If you use the client version skip this step. It would be relevant to process this step, if you have on a computer or a server with a powerfull GPU.\
+     For more information check "Install_dependencies_on_GPU.md"
 
 -----
 ### Results
