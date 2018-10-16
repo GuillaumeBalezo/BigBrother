@@ -11,23 +11,23 @@ In our algorithm we use:
 ...
 
 ------
-There are two different versions of our algorithm: a closed base and a opened base versions.
+There are two different versions of our algorithm: a closed base and a opened base version.
 - In the closed base, you have to manually put one picture of each persons you want to identify. The pictures should have the following name: Name_FirstName.jpg (other usual format should work) and should be in the folder /ressource/know_peoples
 - In the opened base, the algorithm automatically associates a random identifier on each person it detects for the first time, so that if the same person is detected later it will have the same id (the identifiers are deleted each time you stop it)
 
 ### Branches content
 
-- master
+- master:
 You can run the algorithm locally on your computer.
 
-- server_mtcnn_openedbase
+- server_mtcnn_openedbase:
 On this branch, you can find the opened-based version of our algorithm that you can deploy on a computer with performing GPUs (on AWS for instance).
 You will use the client version (that you can find on the client branch), in order to connect and send the video stream coming from your webcam to the server.
 
-- server_mtcnn_closedbase
+- server_mtcnn_closedbase:
 As before, it's the closed-base version, you can used to deploy the algorithm on a server.
 
-- client
+- client:
 Use this version to send your video stream coming from your webcam to the server. You just have to specify the IP adress and the port of the server.
 
 ### Installs
