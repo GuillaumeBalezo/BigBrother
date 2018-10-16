@@ -2,9 +2,9 @@
 
  Face detection and re-identifaction of people from a videostream 
 
-BigBrother, why a name like that? 
-At first, we were 9 students that didn't know anything about computer vision, cloud neither deeplearning. This project was a good start for us to learn such interesting fields.
-We wanted to show what only a couple of students can achieve only in less than a year and by starting with a beginner level.
+BigBrother, why a name like that? \
+At first, we were 9 students that didn't know anything about computer vision, cloud neither deeplearning. This project was a good start for us to learn such interesting fields.\
+We wanted to show what only a couple of students can achieve only in less than a year and by starting with a beginner level.\
 In our algorithm we use:
 - mtcnn network (to detect people)
 -
@@ -17,17 +17,17 @@ There are two different versions of our algorithm: a closed base and a opened ba
 
 ### Branches content
 
-- master:
+- master:\
 You can run the algorithm locally on your computer.
 
-- server_mtcnn_openedbase:
-On this branch, you can find the opened-based version of our algorithm that you can deploy on a computer with performing GPUs (on AWS for instance).
+- server_mtcnn_openedbase:\
+On this branch, you can find the opened-based version of our algorithm that you can deploy on a computer with performing GPUs (on AWS for instance).\
 You will use the client version (that you can find on the client branch), in order to connect and send the video stream coming from your webcam to the server.
 
-- server_mtcnn_closedbase:
+- server_mtcnn_closedbase:\
 As before, it's the closed-base version, you can used to deploy the algorithm on a server.
 
-- client:
+- client:\
 Use this version to send your video stream coming from your webcam to the server. You just have to specify the IP adress and the port of the server.
 
 ### Installs
@@ -35,11 +35,11 @@ Use this version to send your video stream coming from your webcam to the server
 sudo pip install -r requirements.txt
 sudo pip3 install -r requirements.txt
 - On the master branch, you have to process some other installs:
-     1. OpenCv: You can install it with pip (pip install opencv-python) but you can have some errors because it's a quick install, so if it doesn't work try ti follow this tutorial:
-     [a link](https://docs.opencv.org/3.4.3/d2/de6/tutorial_py_setup_in_ubuntu.html)
+     1. OpenCv: You can install it with pip (pip install opencv-python) but you can have some errors because it's a quick install, so if it doesn't work try ti follow this tutorial:\
+     [a link](https://docs.opencv.org/3.4.3/d2/de6/tutorial_py_setup_in_ubuntu.html)\
      If you use the server version don't install OpenCv and skip this step.
-     2. (Optional) If you want to speed the run time of the algorithm: Install Cuda, CuDNN (check what version you should use according to your GPU) and "install tensorflow-gpu" with pip (Once again be carreful of the version you will use according to the version of Cuda and CuDNN)
-     [a link](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html) For Cuda Toolkit v.10
+     2. (Optional) If you want to speed the run time of the algorithm: Install Cuda, CuDNN (check what version you should use according to your GPU) and "install tensorflow-gpu" with pip (Once again be carreful of the version you will use according to the version of Cuda and CuDNN)\
+     [a link](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html) For Cuda Toolkit v.10\
      If you use the client version skip this step. It would be relevant to process this step, if you have on a computer or a server with a powerfull GPU.
 
 -----
