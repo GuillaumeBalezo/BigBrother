@@ -7,8 +7,8 @@ At first, we were 9 students that didn't know anything about computer vision, cl
 We wanted to show what only a couple of students can achieve only in less than a year and by starting with a beginner level.\
 In our algorithm we use:
 - mtcnn network (to detect people)
--
-...
+- facenet (to identify people)
+- Hog (to detect quickly people during the tracking)
 
 ------
 There are two different versions of our algorithm: a closed base and a opened base version.
