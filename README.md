@@ -49,7 +49,7 @@ sudo pip3 install -r requirements.txt
    2.
 -----
 ### Results
-[linkname](https://www.youtube.com/watch?v=P8l9K7zncbE&feature=youtu.be)
+[linkname](https://youtu.be/P8l9K7zncbE)
 -----
 ### Our team
 ![alt text](https://raw.githubusercontent.com/GuillaumeBalezo/BigBrother/master/ressources/unknown_peoples/image1.jpg)
