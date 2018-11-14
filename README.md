@@ -12,7 +12,7 @@ In our algorithm we use:
 
 ------
 There are two different versions of our algorithm: a closed base and a opened base version.
-- In the closed base, you have to manually put one picture of each persons you want to identify. The pictures should have the following name: Name_FirstName.jpg (other usual format should work) and should be in the folder /ressource/know_peoples
+- In the closed base, you have to manually put one picture of each persons you want to identify. The pictures should have the following name: Name_FirstName.jpg (other usual format should work) and should be in the folder /ressource/know_peoples. You need to process preprocessing.py each time you modify the database.
 - In the opened base, the algorithm automatically associates a random identifier on each person it detects for the first time, so that if the same person is detected later it will have the same id (the identifiers are deleted each time you stop it)
 
 ### Branches content
@@ -43,9 +43,13 @@ sudo pip3 install -r requirements.txt
      If you use the client version skip this step. It would be relevant to process this step, if you have on a computer or a server with a powerfull GPU.\
      For more information check "Install_dependencies_on_GPU.md"
 
+##How to use it
+- Locally: if you want to use the closedbase version:
+   1. 
+   2.
 -----
 ### Results
-
+[linkname](https://www.youtube.com/watch?v=P8l9K7zncbE&feature=youtu.be)
 -----
 ### Our team
 ![alt text](https://raw.githubusercontent.com/GuillaumeBalezo/BigBrother/master/ressources/unknown_peoples/image1.jpg)
