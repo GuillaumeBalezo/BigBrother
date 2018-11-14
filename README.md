@@ -43,12 +43,27 @@ sudo pip3 install -r requirements.txt
      If you use the client version skip this step. It would be relevant to process this step, if you have on a computer or a server with a powerfull GPU.\
      For more information check "Install_dependencies_on_GPU.md"
 
-##How to use it
-- Locally: if you want to use the closedbase version:
-   1. 
-   2.
+## How to use our algorithm
+What you need a computer with a webcam. We recommened to use linux when executing our code (we use only linux when we were working on this project but it could work also on windows or Mac OS)
+- Locally: A. If you want to use the closedbase version:
+      1. You have to manually put one picture of each persons you want to identify. The pictures should have the following name: Name_FirstName.jpg (other usual format should work) and should be in the folder /ressource/know_peoples.
+      2. Process preprocessing.py each time you modify your database
+      3. Finally run webcam_closedbase.py
+   B. If you want to use the openedbase:
+      1. Simply run webcam_openedbase.py
+   C. If you want to execute our code on a video already record
+      1. Make the same two first step of the closedbase
+      2. Put your video file in the same folder as video_file.py
+      3. Change the value of input_title in video_file.py
+      4. Run video_file.py
+- In remote:
+      1. You have to make the specific installs on both side (server and client)
+      2. (Optional) If you work on the closedbase version please refer in order to add those you want to detect in the database.
+      3. In server.py (on the server) and in client.py (on the client) specify the ip adress of the server and the port of the server you want to use (Be carefull the firewall on both side)
+      4. Process server.py then client.py. (The server can receive differents connection at the same time)
 -----
 ### Results
+Click on the image to watch our video
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/P8l9K7zncbE/0.jpg)](https://youtu.be/P8l9K7zncbE)
 -----
 ### Our team
