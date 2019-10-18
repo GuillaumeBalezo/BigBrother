@@ -1,7 +1,0 @@
-numpy
-imageio
-opencv-python
-dlib
-h5py
-
-scikit-learn

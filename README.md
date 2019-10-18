@@ -1,73 +1,58 @@
-# BigBrother
+# Big Brother
 
- Face detection and re-identifaction of people from a videostream 
+Facial recognition of people from a video stream.
 
-BigBrother, why a name like that? \
-At first, we were 9 students that didn't know anything about computer vision, cloud neither deeplearning. This project was a good start for us to learn such interesting fields.\
-We wanted to show what only a couple of students can achieve only in less than a year and by starting with a beginner level.\
-In our algorithm we use:
-- mtcnn network (to detect people)
-- facenet (to identify people)
-- Hog (to detect quickly people during the tracking)
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/EuzzjI9s7yE/hqdefault.jpg)]( https://youtu.be/EuzzjI9s7yE)
 
-------
-There are two different versions of our algorithm: a closed base and a opened base version.
-- In the closed base, you have to manually put one picture of each persons you want to identify. The pictures should have the following name: Name_FirstName.jpg (other usual format should work) and should be in the folder /ressource/know_peoples. You need to process preprocessing.py each time you modify the database.
-- In the opened base, the algorithm automatically associates a random identifier on each person it detects for the first time, so that if the same person is detected later it will have the same id (the identifiers are deleted each time you stop it)
 
-### Branches content
+## Why Big Brother ?
 
-- master:\
-You can run the algorithm locally on your computer.
+Big Brother is a school project carried out at the Télécom SudParis (a French engineering school). We have developed a facial recognition system with accurate detection and tracking of faces. Having little knowledge at the beginning, we embarked on this challenge to show what 9 beginners could do in a few months and to warn about the potential dangers of these technologies.
 
-- server_mtcnn_openedbase:\
-On this branch, you can find the opened-based version of our algorithm that you can deploy on a computer with performing GPUs (on AWS for instance).\
-You will use the client version (that you can find on the client branch), in order to connect and send the video stream coming from your webcam to the server.
 
-- server_mtcnn_closedbase:\
-As before, it's the closed-base version, you can used to deploy the algorithm on a server.
+## How it works ?
 
-- client:\
-Use this version to send your video stream coming from your webcam to the server. You just have to specify the IP adress and the port of the server.
+The pipeline is as follows :
 
-### Installs
-- In each branch, you will find a requirements.txt, you just have to launch the following command from a shell (ubuntu here):
-sudo pip install -r requirements.txt
-sudo pip3 install -r requirements.txt
-- On the master branch, you have to process some other installs:
-     1. OpenCv: You can install it with pip (pip install opencv-python) but you can have some errors because it's a quick install, so if it doesn't work try ti follow this tutorial:\
-     https://docs.opencv.org/3.4.3/d2/de6/tutorial_py_setup_in_ubuntu.html  \
-     If you use the server version don't install OpenCv and skip this step.
-     2. (Optional) If you want to speed the run time of the algorithm: Install Cuda, CuDNN (check what version you should use according to your GPU) and "install tensorflow-gpu" with pip (Once again be carreful of the version you will use according to the version of Cuda and CuDNN)\
-     https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html For Cuda Toolkit v.10\
-     If you use the client version skip this step. It would be relevant to process this step, if you have on a computer or a server with a powerfull GPU.\
-     For more information check "Install_dependencies_on_GPU.md"
+image -> face detection, landmarks estimation -> feature extraction -> matching with database features
 
-## How to use our algorithm
-What you need a computer with a webcam. We recommened to use linux when executing our code (we use only linux when we were working on this project but it could work also on windows or Mac OS)
-- Locally: A. If you want to use the closedbase version: \
-      1. You have to manually put one picture of each persons you want to identify. The pictures should have the following name: Name_FirstName.jpg (other usual format should work) and should be in the folder /ressource/know_peoples. \
-      2. Process preprocessing.py each time you modify your database \
-      3. Finally run webcam_closedbase.py \
-   B. If you want to use the openedbase: \
-      1. Simply run webcam_openedbase.py \
-   C. If you want to execute our code on a video already record \
-      1. Make the same two first step of the closedbase \
-      2. Put your video file in the same folder as video_file.py \
-      3. Change the value of input_title in video_file.py \
-      4. Run video_file.py \
-- In remote: \
-      1. You have to make the specific installs on both side (server and client) \
-      2. (Optional) If you work on the closedbase version please refer in order to add those you want to detect in the database. \
-      3. In server.py (on the server) and in client.py (on the client) specify the ip adress of the server and the port of the server you want to use (Be carefull the firewall on both side) \
-      4. Process server.py then client.py. (The server can receive differents connection at the same time) \
------
-### Results
-Click on the image to watch our video
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/P8l9K7zncbE/0.jpg)](https://youtu.be/P8l9K7zncbE)
------
+- Face detection : HOG, MTCNN, RetinaFace (soon)
+- Facial landmarks estimation : dlib algorithms
+- Feature extraction : FaceNet, ArcFace (soon)
+- Tracking : opencv algorithms
+- Matching : L2 distance, Hungarian algorithm
+
+
+## How to use it ?
+
+0. Requirements :
+- python 3.X
+- os, pkg_resources, time, PIL, numpy, scipy, pandas
+- opencv -> pip install opencv-python or conda install opencv-python
+- dlib -> pip install dlib or conda install dlib
+- if you want to use MTCNN face detection : mtcnn -> pip install mtcnn or conda install mtcnn
+1. Clone the repo
+2. Download the model weights : http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2 and http://dlib.net/files/dlib_face_recognition_resnet_model_v1.dat.bz2 then unzip and put 'dlib_face_recognition_resnet_model_v1.dat' and 'shape_predictor_68_face_landmarks.dat' in './models/'
+3. Add images in the './data/known_peoples/' : each image should only contain ONE face, with the name of the person as name of the image
+4. Launch ./Preprocessing.py : it will create 'dataset.csv' in './data/', this file contains a feature vector for each person in the dataset and the corresponding name
+5. Launch ./Main.py
+
+
+## To do
+
+- data visualization of the feature space with t-SNE
+- make it work in open database (no pre-defined set of people to recognize)
+- code profiling and optimization to real-time (jit, cuda, c++)
+- use binary tree to efficiently process the database
+- mobile/web app (flask?)
+- arcface + retinaface
+
+
 ### Our team
-![alt text](https://raw.githubusercontent.com/GuillaumeBalezo/BigBrother/master/ressources/unknown_peoples/image1.jpg)
 
-### Collaboration
-This project had been achieved collaboratively with the start-up Watiz and Telecom SudParis thanks to this educative project GATE.
+![alt text](https://raw.githubusercontent.com/ridouaneg/Big-Brother/master/data/unknown_peoples/image1.jpg)
+
+
+## Collaboration
+
+This project was achieved as part of Télécom SudParis' GATE project in collaboration with the start-up Watiz.
